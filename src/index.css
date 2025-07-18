@@ -1,0 +1,291 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+    --primary: 240 5.9% 10%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 240 10% 3.9%;
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+    --radius: 0.5rem
+  ;
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%}
+
+  .dark {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 240 5.9% 10%;
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 240 4.9% 83.9%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%
+  ;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%}
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Pacman Game Styles */
+.pixel-font {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.game-container {
+  background: #000;
+  color: #ff0;
+}
+
+.game-board {
+  background: #000;
+  border: 2px solid #00f;
+}
+
+.game-cell {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+/* Walls */
+.wall {
+  background: #00f;
+  border: 1px solid #44f;
+}
+
+/* Pellets */
+.pellet {
+  background: #000;
+  position: relative;
+}
+
+.pellet::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 2px;
+  height: 2px;
+  background: #ff0;
+  border-radius: 50%;
+}
+
+/* Power Pellets */
+.power-pellet {
+  background: #000;
+  position: relative;
+}
+
+.power-pellet::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 8px;
+  height: 8px;
+  background: #ff0;
+  border-radius: 50%;
+  animation: pulse 0.5s infinite alternate;
+}
+
+@keyframes pulse {
+  from { opacity: 100%; }
+  to { opacity: 50%; }
+}
+
+/* Pacman */
+.pacman {
+  background: #000;
+  position: relative;
+  z-index: 10;
+}
+
+.pacman::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 16px;
+  height: 16px;
+  background: #ff0;
+  border-radius: 50%;
+  clip-path: polygon(100% 0%, 50% 50%, 100% 100%);
+}
+
+.pacman.left::after {
+  clip-path: polygon(0% 0%, 50% 50%, 0% 100%);
+}
+
+.pacman.up::after {
+  clip-path: polygon(0% 100%, 50% 50%, 100% 100%);
+}
+
+.pacman.down::after {
+  clip-path: polygon(0% 0%, 50% 50%, 100% 0%);
+}
+
+.pacman.right::after {
+  clip-path: polygon(100% 0%, 50% 50%, 100% 100%);
+}
+
+/* Ghosts */
+.ghost {
+  background: #000;
+  position: relative;
+  z-index: 5;
+}
+
+.ghost::after {
+  content: '';
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 16px;
+  height: 16px;
+  border-radius: 8px 8px 0 0;
+  position: relative;
+}
+
+.ghost.red::after {
+  background: #f00;
+}
+
+.ghost.pink::after {
+  background: #ffb8ff;
+}
+
+.ghost.blue::after {
+  background: #0ff;
+}
+
+.ghost.orange::after {
+  background: #ffb852;
+}
+
+.ghost.scared::after {
+  background: #00f !important;
+  animation: flash 0.2s infinite alternate;
+}
+
+@keyframes flash {
+  from { background: #00f; }
+  to { background: #fff; }
+}
+
+/* Ghost body shape */
+.ghost::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 16px;
+  height: 8px;
+  background: inherit;
+  clip-path: polygon(0% 0%, 20% 100%, 40% 0%, 60% 100%, 80% 0%, 100% 100%, 100% 0%);
+  z-index: 1;
+}
+
+.ghost.red::before {
+  background: #f00;
+}
+
+.ghost.pink::before {
+  background: #ffb8ff;
+}
+
+.ghost.blue::before {
+  background: #0ff;
+}
+
+.ghost.orange::before {
+  background: #ffb852;
+}
+
+.ghost.scared::before {
+  background: #00f !important;
+  animation: flash 0.2s infinite alternate;
+}
+
+/* Game UI */
+.game-container button {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 10px;
+  padding: 8px 16px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.game-container button:hover {
+  transform: scale(1.05);
+}
